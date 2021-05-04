@@ -1,15 +1,25 @@
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GameEngine.Tests
 {
-  public class BossEnemyShould
-  {
-    [Fact]
-    public void HaveCorrectPower()
+    public class BossEnemyShould
     {
-      BossEnemy sut = new BossEnemy();
+        private readonly ITestOutputHelper _output;
 
-      Assert.Equal(166.667, sut.TotalSpecialAttackPower, 3);
+        public BossEnemyShould(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
+        [Fact]
+        [Trait("Category", "Boss")]
+        public void HaveCorrectPower()
+        {
+            _output.WriteLine("Creating Boss Enemy");
+            BossEnemy sut = new BossEnemy();
+
+            Assert.Equal(166.667, sut.TotalSpecialAttackPower, 3);
+        }
     }
-  }
 }
